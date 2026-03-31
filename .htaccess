@@ -1,0 +1,46 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /instafolio/
+
+    # Allow direct access to installer folder
+    RewriteRule ^installer/ - [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    Options +FollowSymLinks
+    DirectoryIndex index.php
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Deny access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect application folders
+<IfModule mod_rewrite.c>
+    RewriteRule ^application/ - [F,L]
+    RewriteRule ^system/ - [F,L]
+    RewriteRule ^vendor/ - [F,L]
+</IfModule>
+
+# PHP Settings
+<IfModule mod_php7.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value max_execution_time 300
+    php_value memory_limit 256M
+    php_value upload_max_filesize 100M
+    php_value post_max_size 100M
+</IfModule>

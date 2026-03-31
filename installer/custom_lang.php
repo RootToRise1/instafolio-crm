@@ -1,0 +1,2 @@
+-- Create custom_lang.php placeholder if not exists
+-- This file is required by the application

@@ -1,0 +1,22 @@
+/* Remove this if you dont want background overlay over the image or adjust per your needs */
+body.login_admin:before {
+    content: " ";
+    background: rgba(31, 31, 31, 0.7);
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+}
+body.login_admin {
+  background: url('https://youtubemarketing.com.au/dash/media/black-wireframe.jpeg') no-repeat center center fixed; /* The full image url*/
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+body.customers_login {
+  background: url('https://youtubemarketing.com.au/dash/media/chair-phone.jpeg') no-repeat center center fixed; /* The full image url*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

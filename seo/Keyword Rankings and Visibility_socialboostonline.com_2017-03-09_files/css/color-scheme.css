@@ -1,0 +1,33 @@
+body {	background-color: #e7e7e7; 	color: #202020}
+.row-separate {	background-color: #e7e7e7; 	box-shadow:  0 1px 1px #bcbcbc inset}
+.table-header-cell {	color: #aaaaaa}
+.gray {	color: #aaaaaa}
+.widget-header {	background-color: #f1f1f1; 	color: #707070}
+.widget-body {	background-color: #ffffff}
+.row-white {	background-color: #ffffff}
+.widget {	box-shadow: 0 1px 1px #bcbcbc}
+.widget-s {	background-color: #ffffff; 	box-shadow: 0 1px 1px #bcbcbc}
+.widget-competitor {	background-color: #f8f8f8}
+.splitter-solid {	border-top-color: #e0e0e0}
+.col-separate-r {	border-bottom-color: #e0e0e0}
+.info-desc-bottom {	border-top-color: #e0e0e0}
+.info-block {	border-right-color: #e0e0e0; 	border-bottom-color: #e0e0e0}
+.border-top {	border-top-color: #e0e0e0}
+.border-right {	border-right-color: #e0e0e0}
+.border-left {	border-left-color: #e0e0e0}
+.border-bottom {	border-bottom-color: #e0e0e0}
+.separator-horizontal-50 {	border-bottom: 1px solid #e0e0e0}
+.sep-m {	color: #e0e0e0}
+.right-legend-wrapper {	border-color: #e0e0e0}
+.table-header-cell-color {	border-bottom-color: #e0e0e0 !important}
+.table-header-cell {	border-bottom-color: #e0e0e0}
+.img-border {	border-color: #e0e0e0}
+a {	color: #4076b4}
+a:hover {	color: #d72800}
+.line-wrapper {	background-color: #dfdfdf}
+.line-wrapper-m {	background-color: #dfdfdf}
+.line-wrapper-l {	background-color: #dfdfdf}
+.line-wrapper-m {	background-color: #dfdfdf}
+.line-wrapper-s {	background-color: #dfdfdf}
+.line-progress {	background-color: #90c274}
+.line-decline {	background-color: #d28063}

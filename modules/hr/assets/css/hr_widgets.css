@@ -1,0 +1,441 @@
+/* HR Attendance Widget */
+.hr-attendance {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.hr-attendance .panel_s {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 200px;
+}
+.hr-attendance .panel-body {
+    padding: 0 !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.hr-attendance .widget-dragger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    cursor: move;
+    z-index: 10;
+    background: transparent;
+}
+.hr-attendance .widget-dragger:hover {
+    background: rgba(33, 150, 243, 0.03);
+}
+.hr-att-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+}
+.hr-att-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #222;
+}
+.hr-att-title i {
+    color: #2196F3;
+    font-size: 16px;
+}
+.hr-att-time {
+    font-size: 22px;
+    font-weight: 800;
+    color: #333;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+.hr-att-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    flex: 1;
+}
+.hr-att-status {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.hr-att-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.hr-att-status-badge.active {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+.hr-att-status-badge.active i {
+    color: #4CAF50;
+    font-size: 12px;
+}
+.hr-att-status-badge.break {
+    background: #FFF8E1;
+    color: #F57F17;
+}
+.hr-att-status-badge.break i {
+    color: #FFC107;
+    font-size: 12px;
+}
+.hr-att-status-badge.idle {
+    background: #ECEFF1;
+    color: #607D8B;
+}
+.hr-att-status-badge.idle i {
+    color: #90A4AE;
+    font-size: 12px;
+}
+.hr-att-info {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+.hr-att-info-box {
+    text-align: center;
+}
+.hr-att-info-label {
+    display: block;
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.hr-att-info-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #222;
+}
+.hr-att-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    text-align: center;
+}
+.hr-att-footer {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+}
+.hr-att-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 15;
+}
+.hr-att-btn i {
+    font-size: 12px;
+}
+.hr-att-btn:hover {
+    transform: translateY(-1px);
+}
+.hr-att-btn-in {
+    background: #2196F3;
+    color: #fff;
+}
+.hr-att-btn-in:hover {
+    background: #1976D2;
+}
+.hr-att-btn-out {
+    background: #f44336;
+    color: #fff;
+}
+.hr-att-btn-out:hover {
+    background: #D32F2F;
+}
+.hr-att-btn-break {
+    background: #FF9800;
+    color: #fff;
+}
+.hr-att-btn-break:hover {
+    background: #F57C00;
+}
+.hr-att-btn-break-end {
+    background: #00BCD4;
+    color: #fff;
+}
+.hr-att-btn-break-end:hover {
+    background: #00ACC1;
+}
+.hr-att-btn.btn-block {
+    width: 100%;
+}
+
+/* HR Leaves Widget */
+.hr-leaves {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.hr-leaves .panel_s {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 200px;
+}
+.hr-leaves .panel-body {
+    padding: 0 !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.hr-leaves .widget-dragger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+    cursor: move;
+    z-index: 10;
+    background: transparent;
+}
+.hr-leaves .widget-dragger:hover {
+    background: rgba(233, 30, 99, 0.03);
+}
+.hr-leaves-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+}
+.hr-leaves-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #222;
+}
+.hr-leaves-title i {
+    color: #E91E63;
+    font-size: 16px;
+}
+.hr-leaves-count {
+    background: #FFC107;
+    color: #333;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+.hr-leaves-body {
+    padding: 12px;
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.hr-leaves-spacer {
+    flex: 1;
+    min-height: 20px;
+}
+.hr-leaves-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.hr-leaves-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+.hr-leaves-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.hr-leaves-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+}
+.hr-leaves-user-info {
+    display: flex;
+    flex-direction: column;
+}
+.hr-leaves-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: #222;
+}
+.hr-leaves-type {
+    font-size: 10px;
+    color: #888;
+}
+.hr-leaves-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.hr-leaves-date {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+}
+.hr-leaves-approve {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #4CAF50;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 15;
+}
+.hr-leaves-approve:hover {
+    background: #388E3C;
+    transform: scale(1.05);
+}
+.hr-leaves-more {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    color: #667eea;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 15;
+}
+.hr-leaves-more:hover {
+    background: #667eea;
+    color: #fff;
+}
+.hr-leaves-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+    z-index: 5;
+}
+.hr-leaves-empty i {
+    font-size: 32px;
+    color: #4CAF50;
+    margin-bottom: 8px;
+}
+.hr-leaves-empty span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+.hr-leaves-footer {
+    padding: 10px 14px;
+    background: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    flex-shrink: 0;
+}
+.hr-leaves-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #667eea;
+    text-decoration: none;
+    position: relative;
+    z-index: 15;
+}
+.hr-leaves-link:hover {
+    text-decoration: underline;
+}
+
+/* HR Employee Table Fixes - Make row-options always visible */
+table.table-hr-employees .row-options {
+    position: static !important;
+    left: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    padding: 2px 0;
+    font-size: 12px;
+}
+
+table.table-hr-employees tr:hover td .row-options {
+    position: static !important;
+}
+
+/* Employee Profile Tabs */
+.employee-profile-tabs {
+    margin-bottom: 20px;
+}
