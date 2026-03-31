@@ -1,6 +1,6 @@
 ## Goal
 
-Build an HR module for a Perfex CRM system with:
+Build an HR module for a Instafolio CRM system with:
 1. **Dashboard Widgets** - Attendance (clock in/out) and Pending Leave Requests widgets
 2. **Employee Page** - Match exactly the Customers page design and functionality with list view, profile view/edit, and HR-specific tabs
 
@@ -9,7 +9,7 @@ Build an HR module for a Perfex CRM system with:
 - HR menu should be a parent in the sidebar with child menu items
 - Employee should be a child under HR Setup in the Setup menu
 - All HR pages must use proper CRM theme/layout
-- Module should follow existing CRM module structure pattern (Perfex CRM pattern)
+- Module should follow existing CRM module structure pattern (Instafolio CRM pattern)
 - Employee page design must match exactly the Customers page structure
 - Dashboard widgets should be first position on dashboard (before other widgets)
 - CSS must be in HR module assets (not hardcoded)
@@ -37,7 +37,7 @@ Build an HR module for a Perfex CRM system with:
 14. **Staff table** has columns: `department_id`, `designation_id`, `hr_role_id`, `manager_id`, `hr_shift_id`, `employment_type`, `salary`, `date_of_joining`, `website`
 15. **HR tables exist**: `tblhr_departments`, `tblhr_designations`, `tblhr_roles`, `tblhr_shifts`, `tblhr_leave_requests`, `tblhr_attendance`, etc.
 16. **Column alias detection** - Using `preg_match('/\s+as\s+/i', $_field)` instead of `strpos()` to correctly detect SQL aliases
-17. **Database prefix** - Perfex uses `tbl` as database prefix (not empty string)
+17. **Database prefix** - Instafolio uses `tbl` as database prefix (not empty string)
 
 ## Accomplished
 

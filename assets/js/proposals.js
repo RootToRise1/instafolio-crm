@@ -23,7 +23,7 @@ function init_proposal_editor() {
         selector: 'div.editable',
         inline: true,
         theme: 'inlite',
-        // skin: 'perfex',
+        // skin: 'instafolio',
         relative_urls: false,
         remove_script_host: false,
         inline_styles: true,
