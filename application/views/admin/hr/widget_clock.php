@@ -94,7 +94,7 @@ try {
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        <a href="<?php echo admin_url('hr/my_attendance?action=clock_in'); ?>" class="hr-att-btn hr-att-btn-in btn-block">
+                        <a href="<?php echo admin_url('hr/clock_in'); ?>" class="hr-att-btn hr-att-btn-in btn-block">
                             <i class="fa fa-sign-in"></i>
                             <span><?php echo _l('hr_check_in'); ?></span>
                         </a>

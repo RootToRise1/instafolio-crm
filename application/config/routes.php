@@ -176,8 +176,15 @@ $route['admin/modules/(:any)']        = 'admin/mods/$1';
 $route['admin/modules/(:any)/(:any)'] = 'admin/mods/$1/$2';
 
 /**
- * HR Module Routes - handled via query parameters in my_attendance
+ * HR Module Routes - direct admin controller
  */
+$route['admin/hr/my_attendance'] = 'admin_hr_attendance/index';
+$route['admin/hr/clock_in']       = 'admin_hr_attendance/clock_in';
+$route['admin/hr/clock_out']      = 'admin_hr_attendance/clock_out';
+$route['admin/hr/break_in']       = 'admin_hr_attendance/break_in';
+$route['admin/hr/break_out']      = 'admin_hr_attendance/break_out';
+$route['admin/hr/attendance']     = 'hr/attendance';
+$route['admin/hr/attendance_report'] = 'hr/attendance_report';
 
 // Public single ticket route
 $route['forms/tickets/(:any)'] = 'forms/public_ticket/$1';
