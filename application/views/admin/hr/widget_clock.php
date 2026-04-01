@@ -108,7 +108,18 @@ try {
 <script>
 function hr_attendance_action(url, action) {
     var btn = $(event.target).closest('a');
-    var originalText = btn.html();
+    if (!btn.length) {
+        btn = $(event.currentTarget).closest('a');
+    }
+    
+    console.log('HR Attendance Action:', action, url);
+    
+    if (!btn.length) {
+        alert('Error: Could not find button element');
+        return;
+    }
+    
+    var originalHtml = btn.html();
     btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
     btn.prop('disabled', true);
     
@@ -116,7 +127,12 @@ function hr_attendance_action(url, action) {
         url: url,
         type: 'GET',
         dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function(response) {
+            console.log('Success:', response);
             if (response.success) {
                 alert_float('success', response.message || 'Action completed successfully');
             } else {
@@ -126,12 +142,14 @@ function hr_attendance_action(url, action) {
                 window.location.reload();
             }, 1500);
         },
-        error: function(xhr) {
-            // If not JSON response, it might be a redirect - reload the page
-            if (xhr.responseText.indexOf('login') > -1) {
+        error: function(xhr, status, error) {
+            console.log('Error:', status, error, 'Response:', xhr.responseText);
+            // Check if it's a redirect to login
+            if (xhr.responseText && xhr.responseText.indexOf('login') > -1) {
                 window.location.href = '<?php echo admin_url("authentication"); ?>';
             } else {
-                window.location.reload();
+                // Direct redirect instead of reload
+                window.location.href = '<?php echo admin_url("hr/my_attendance"); ?>';
             }
         }
     });

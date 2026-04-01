@@ -417,7 +417,7 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
-        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        $isAjax = $this->input->is_ajax_request();
         
         if (!$staff_id) {
             if ($isAjax) {
@@ -449,7 +449,7 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
-        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        $isAjax = $this->input->is_ajax_request();
         
         if (!$staff_id) {
             if ($isAjax) {
@@ -484,7 +484,7 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
-        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        $isAjax = $this->input->is_ajax_request();
         
         if (!$staff_id) {
             if ($isAjax) {
@@ -516,7 +516,7 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
-        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        $isAjax = $this->input->is_ajax_request();
         
         if (!$staff_id) {
             if ($isAjax) {
