@@ -79,22 +79,22 @@ try {
                 <div class="hr-att-footer">
                     <?php if ($checked_in) { ?>
                         <?php if ($on_break) { ?>
-                            <a href="<?php echo admin_url('hr/break_out'); ?>" class="hr-att-btn hr-att-btn-break-end btn-block">
+                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/break_out'); ?>', 'break_out')" class="hr-att-btn hr-att-btn-break-end btn-block">
                                 <i class="fa fa-play"></i>
                                 <span><?php echo _l('hr_end_break'); ?></span>
                             </a>
                         <?php } else { ?>
-                            <a href="<?php echo admin_url('hr/break_in'); ?>" class="hr-att-btn hr-att-btn-break">
+                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/break_in'); ?>', 'break_in')" class="hr-att-btn hr-att-btn-break">
                                 <i class="fa fa-pause"></i>
                                 <span><?php echo _l('hr_break'); ?></span>
                             </a>
-                            <a href="<?php echo admin_url('hr/clock_out'); ?>" class="hr-att-btn hr-att-btn-out">
+                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/clock_out'); ?>', 'clock_out')" class="hr-att-btn hr-att-btn-out">
                                 <i class="fa fa-sign-out"></i>
                                 <span><?php echo _l('hr_check_out'); ?></span>
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        <a href="<?php echo admin_url('hr/clock_in'); ?>" class="hr-att-btn hr-att-btn-in btn-block">
+                        <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/clock_in'); ?>', 'clock_in')" class="hr-att-btn hr-att-btn-in btn-block">
                             <i class="fa fa-sign-in"></i>
                             <span><?php echo _l('hr_check_in'); ?></span>
                         </a>
@@ -104,3 +104,36 @@ try {
         </div>
     </div>
 </div>
+
+<script>
+function hr_attendance_action(url, action) {
+    var btn = $(event.target).closest('a');
+    var originalText = btn.html();
+    btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
+    btn.prop('disabled', true);
+    
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                alert_float('success', response.message || 'Action completed successfully');
+            } else {
+                alert_float('danger', response.message || 'An error occurred');
+            }
+            setTimeout(function() {
+                window.location.reload();
+            }, 1500);
+        },
+        error: function(xhr) {
+            // If not JSON response, it might be a redirect - reload the page
+            if (xhr.responseText.indexOf('login') > -1) {
+                window.location.href = '<?php echo admin_url("authentication"); ?>';
+            } else {
+                window.location.reload();
+            }
+        }
+    });
+}
+</script>

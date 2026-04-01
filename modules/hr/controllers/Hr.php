@@ -417,13 +417,24 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        
         if (!$staff_id) {
+            if ($isAjax) {
+                echo json_encode(['success' => false, 'message' => 'Session expired. Please login again.']);
+                return;
+            }
             set_alert('danger', 'Unable to identify user. Please login again.');
             redirect(admin_url('hr/my_attendance'));
             return;
         }
         
         $result = $this->hr_model->clock_in($staff_id);
+        
+        if ($isAjax) {
+            echo json_encode(['success' => $result['success'], 'message' => $result['message']]);
+            return;
+        }
         
         if ($result['success']) {
             set_alert('success', _l('hr_check_in_success'));
@@ -438,13 +449,27 @@ class Hr extends AdminController
     {
         $staff_id = get_staff_user_id();
         
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        
         if (!$staff_id) {
+            if ($isAjax) {
+                echo json_encode(['success' => false, 'message' => 'Session expired. Please login again.']);
+                return;
+            }
             set_alert('danger', 'Unable to identify user. Please login again.');
             redirect(admin_url('hr/my_attendance'));
             return;
         }
         
         $result = $this->hr_model->clock_out($staff_id);
+        
+        if ($isAjax) {
+            echo json_encode([
+                'success' => $result['success'], 
+                'message' => $result['success'] ? $result['message'] . ' (' . $result['total_hours'] . ' hours)' : $result['message']
+            ]);
+            return;
+        }
         
         if ($result['success']) {
             set_alert('success', _l('hr_check_out_success') . ' (' . $result['total_hours'] . ' hours)');
@@ -458,7 +483,25 @@ class Hr extends AdminController
     public function break_in()
     {
         $staff_id = get_staff_user_id();
+        
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        
+        if (!$staff_id) {
+            if ($isAjax) {
+                echo json_encode(['success' => false, 'message' => 'Session expired. Please login again.']);
+                return;
+            }
+            set_alert('danger', 'Unable to identify user. Please login again.');
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        }
+        
         $result = $this->hr_model->break_in($staff_id);
+        
+        if ($isAjax) {
+            echo json_encode(['success' => $result['success'], 'message' => $result['message']]);
+            return;
+        }
         
         if ($result['success']) {
             set_alert('success', _l('hr_break_in_success'));
@@ -472,7 +515,25 @@ class Hr extends AdminController
     public function break_out()
     {
         $staff_id = get_staff_user_id();
+        
+        $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        
+        if (!$staff_id) {
+            if ($isAjax) {
+                echo json_encode(['success' => false, 'message' => 'Session expired. Please login again.']);
+                return;
+            }
+            set_alert('danger', 'Unable to identify user. Please login again.');
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        }
+        
         $result = $this->hr_model->break_out($staff_id);
+        
+        if ($isAjax) {
+            echo json_encode(['success' => $result['success'], 'message' => $result['message']]);
+            return;
+        }
         
         if ($result['success']) {
             set_alert('success', _l('hr_break_out_success'));
