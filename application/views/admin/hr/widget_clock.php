@@ -107,54 +107,12 @@ try {
 
 <script>
 $(document).ready(function() {
-    // Bind click events properly
+    // Use direct navigation for attendance actions
     $('.hr-att-btn-in, .hr-att-btn-out, .hr-att-btn-break, .hr-att-btn-break-end').on('click', function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-        
-        if (!url || url === 'javascript:void(0)' || url === '#') {
-            // Try to get URL from onclick
-            var onclick = $(this).attr('onclick');
-            if (onclick) {
-                var match = onclick.match(/hr_attendance_action\('([^']+)'/);
-                if (match && match[1]) {
-                    url = match[1];
-                }
-            }
-        }
-        
-        if (!url || url === 'javascript:void(0)' || url === '#') {
-            alert('Error: No valid URL found');
-            return;
-        }
-        
+        // Let the default link behavior work - it will redirect properly when logged in
+        // Just add a visual indication
         var btn = $(this);
-        var originalHtml = btn.html();
         btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
-        btn.prop('disabled', true);
-        
-        console.log('HR Attendance URL:', url);
-        
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                console.log('Success:', response);
-                if (response.success) {
-                    alert_float('success', response.message || 'Action completed successfully');
-                } else {
-                    alert_float('danger', response.message || 'An error occurred');
-                }
-                setTimeout(function() {
-                    window.location.reload();
-                }, 1500);
-            },
-            error: function(xhr, status, error) {
-                console.log('Error:', status, error);
-                window.location.href = '<?php echo admin_url("hr/my_attendance"); ?>';
-            }
-        });
     });
 });
 </script>

@@ -175,6 +175,14 @@ $route['admin/modules']               = 'admin/mods';
 $route['admin/modules/(:any)']        = 'admin/mods/$1';
 $route['admin/modules/(:any)/(:any)'] = 'admin/mods/$1/$2';
 
+/**
+ * HR Module Routes - for direct access without module routing issues
+ */
+$route['hr/clock_in']  = 'admin/hr_attendance/clock_in';
+$route['hr/clock_out'] = 'admin/hr_attendance/clock_out';
+$route['hr/break_in']  = 'admin/hr_attendance/break_in';
+$route['hr/break_out'] = 'admin/hr_attendance/break_out';
+
 // Public single ticket route
 $route['forms/tickets/(:any)'] = 'forms/public_ticket/$1';
 
