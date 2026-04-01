@@ -416,6 +416,13 @@ class Hr extends AdminController
     public function clock_in()
     {
         $staff_id = get_staff_user_id();
+        
+        if (!$staff_id) {
+            set_alert('danger', 'Unable to identify user. Please login again.');
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        }
+        
         $result = $this->hr_model->clock_in($staff_id);
         
         if ($result['success']) {
@@ -430,6 +437,13 @@ class Hr extends AdminController
     public function clock_out()
     {
         $staff_id = get_staff_user_id();
+        
+        if (!$staff_id) {
+            set_alert('danger', 'Unable to identify user. Please login again.');
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        }
+        
         $result = $this->hr_model->clock_out($staff_id);
         
         if ($result['success']) {

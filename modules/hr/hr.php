@@ -270,7 +270,7 @@ function hr_module_init_menu_items()
 
     $CI->app->add_quick_actions_link([
         'name'       => _l('hr_check_in'),
-        'url'        => 'hr/attendance/clock_in',
+        'url'        => 'hr/clock_in',
         'permission' => 'hr',
         'position'   => 1,
         'icon'       => 'fa fa-clock',
