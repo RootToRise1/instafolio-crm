@@ -404,7 +404,46 @@ class Hr extends AdminController
         $staff_id = get_staff_user_id();
         $start_date = $this->input->get('start_date') ?? date('Y-01-01');
         $end_date = $this->input->get('end_date') ?? date('Y-m-d');
-
+        
+        $action = $this->input->get('action');
+        if ($action === 'clock_in') {
+            $result = $this->hr_model->clock_in($staff_id);
+            if ($result['success']) {
+                set_alert('success', _l('hr_check_in_success'));
+            } else {
+                set_alert('danger', $result['message']);
+            }
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        } elseif ($action === 'clock_out') {
+            $result = $this->hr_model->clock_out($staff_id);
+            if ($result['success']) {
+                set_alert('success', _l('hr_check_out_success') . ' (' . $result['total_hours'] . ' hours)');
+            } else {
+                set_alert('danger', $result['message']);
+            }
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        } elseif ($action === 'break_in') {
+            $result = $this->hr_model->break_in($staff_id);
+            if ($result['success']) {
+                set_alert('success', _l('hr_break_in_success'));
+            } else {
+                set_alert('danger', $result['message']);
+            }
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        } elseif ($action === 'break_out') {
+            $result = $this->hr_model->break_out($staff_id);
+            if ($result['success']) {
+                set_alert('success', _l('hr_break_out_success'));
+            } else {
+                set_alert('danger', $result['message']);
+            }
+            redirect(admin_url('hr/my_attendance'));
+            return;
+        }
+        
         $data['attendance'] = $this->hr_model->get_staff_attendance($staff_id, $start_date, $end_date);
         $data['today_attendance'] = $this->hr_model->get_today_attendance($staff_id);
         $data['title'] = _l('hr_my_attendance');
