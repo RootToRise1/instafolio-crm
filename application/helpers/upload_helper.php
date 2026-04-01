@@ -40,9 +40,9 @@ function handle_estimate_request_attachments($estimateRequestId, $index_name = '
                 continue;
             }
 
-            if (isset($_FILES[$index_name][$i]) && _perfex_upload_error($_FILES[$index_name]['error'][$i])) {
+            if (isset($_FILES[$index_name][$i]) && _instafolio_upload_error($_FILES[$index_name]['error'][$i])) {
                 header('HTTP/1.0 400 Bad error');
-                echo _perfex_upload_error($_FILES[$index_name]['error'][$i]);
+                echo _instafolio_upload_error($_FILES[$index_name]['error'][$i]);
                 die;
             }
 
@@ -92,7 +92,7 @@ function handle_estimate_request_attachments($estimateRequestId, $index_name = '
  * @param  mixed $error type of error
  * @return mixed
  */
-function _perfex_upload_error($error)
+function _instafolio_upload_error($error)
 {
     $uploadErrors = [
         0 => _l('file_uploaded_success'),
@@ -134,9 +134,9 @@ function handle_newsfeed_post_attachments($postid)
         return;
     }
 
-    if (isset($_FILES['file']) && _perfex_upload_error($_FILES['file']['error'])) {
+    if (isset($_FILES['file']) && _instafolio_upload_error($_FILES['file']['error'])) {
         header('HTTP/1.0 400 Bad error');
-        echo _perfex_upload_error($_FILES['file']['error']);
+        echo _instafolio_upload_error($_FILES['file']['error']);
         die;
     }
     $path = get_upload_path_by_type('newsfeed') . $postid . '/';
@@ -215,8 +215,8 @@ function handle_project_file_uploads($project_id)
         $path = get_upload_path_by_type('project') . $project_id . '/';
 
         for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
-            if (_perfex_upload_error($_FILES['file']['error'][$i])) {
-                $errors[$_FILES['file']['name'][$i]] = _perfex_upload_error($_FILES['file']['error'][$i]);
+            if (_instafolio_upload_error($_FILES['file']['error'][$i])) {
+                $errors[$_FILES['file']['name'][$i]] = _instafolio_upload_error($_FILES['file']['error'][$i]);
 
                 continue;
             }
@@ -320,9 +320,9 @@ function handle_contract_attachment($id)
         return $hookData['handled_externally_successfully'];
     }
 
-    if (isset($_FILES['file']) && _perfex_upload_error($_FILES['file']['error'])) {
+    if (isset($_FILES['file']) && _instafolio_upload_error($_FILES['file']['error'])) {
         header('HTTP/1.0 400 Bad error');
-        echo _perfex_upload_error($_FILES['file']['error']);
+        echo _instafolio_upload_error($_FILES['file']['error']);
         die;
     }
     if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != '') {
@@ -395,7 +395,7 @@ function handle_lead_attachments($leadid, $index_name = 'file', $form_activity =
 
             // Make sure we have a filepath
             if (!empty($tmpFilePath) && $tmpFilePath != '') {
-                if (_perfex_upload_error($_FILES[$index_name]['error'][$i])
+                if (_instafolio_upload_error($_FILES[$index_name]['error'][$i])
                     || !_upload_extension_allowed($_FILES[$index_name]['name'][$i])) {
                     continue;
                 }
@@ -459,7 +459,7 @@ function handle_task_attachments_array($taskid, $index_name = 'attachments')
 
             // Make sure we have a filepath
             if (!empty($tmpFilePath) && $tmpFilePath != '') {
-                if (_perfex_upload_error($_FILES[$index_name]['error'][$i])
+                if (_instafolio_upload_error($_FILES[$index_name]['error'][$i])
                     || !_upload_extension_allowed($_FILES[$index_name]['name'][$i])) {
                     continue;
                 }
@@ -511,9 +511,9 @@ function handle_sales_attachments($rel_id, $rel_type)
         return;
     }
 
-    if (isset($_FILES['file']) && _perfex_upload_error($_FILES['file']['error'])) {
+    if (isset($_FILES['file']) && _instafolio_upload_error($_FILES['file']['error'])) {
         header('HTTP/1.0 400 Bad error');
-        echo _perfex_upload_error($_FILES['file']['error']);
+        echo _instafolio_upload_error($_FILES['file']['error']);
         die;
     }
 
@@ -616,7 +616,7 @@ function handle_client_attachments_upload($id, $customer_upload = false)
             $tmpFilePath = $_FILES['file']['tmp_name'][$i];
             // Make sure we have a filepath
             if (!empty($tmpFilePath) && $tmpFilePath != '') {
-                if (_perfex_upload_error($_FILES['file']['error'][$i])
+                if (_instafolio_upload_error($_FILES['file']['error'][$i])
                     || !_upload_extension_allowed($_FILES['file']['name'][$i])) {
                     continue;
                 }
@@ -658,9 +658,9 @@ function handle_client_attachments_upload($id, $customer_upload = false)
  */
 function handle_expense_attachments($id)
 {
-    if (isset($_FILES['file']) && _perfex_upload_error($_FILES['file']['error'])) {
+    if (isset($_FILES['file']) && _instafolio_upload_error($_FILES['file']['error'])) {
         header('HTTP/1.0 400 Bad error');
-        echo _perfex_upload_error($_FILES['file']['error']);
+        echo _instafolio_upload_error($_FILES['file']['error']);
         die;
     }
 
@@ -779,8 +779,8 @@ function handle_company_logo_upload()
     foreach ($logoIndex as $logo) {
         $index = 'company_' . $logo;
 
-        if (isset($_FILES[$index]) && !empty($_FILES[$index]['name']) && _perfex_upload_error($_FILES[$index]['error'])) {
-            set_alert('warning', _perfex_upload_error($_FILES[$index]['error']));
+        if (isset($_FILES[$index]) && !empty($_FILES[$index]['name']) && _instafolio_upload_error($_FILES[$index]['error'])) {
+            set_alert('warning', _instafolio_upload_error($_FILES[$index]['error']));
 
             return false;
         }
@@ -845,8 +845,8 @@ function handle_company_logo_upload()
  */
 function handle_company_signature_upload()
 {
-    if (isset($_FILES['signature_image']) && _perfex_upload_error($_FILES['signature_image']['error'])) {
-        set_alert('warning', _perfex_upload_error($_FILES['signature_image']['error']));
+    if (isset($_FILES['signature_image']) && _instafolio_upload_error($_FILES['signature_image']['error'])) {
+        set_alert('warning', _instafolio_upload_error($_FILES['signature_image']['error']));
 
         return false;
     }
@@ -1121,9 +1121,9 @@ function handle_contact_profile_image_upload($contact_id = '')
  */
 function handle_project_discussion_comment_attachments($discussion_id, $post_data, $insert_data)
 {
-    if (isset($_FILES['file']['name']) && _perfex_upload_error($_FILES['file']['error'])) {
+    if (isset($_FILES['file']['name']) && _instafolio_upload_error($_FILES['file']['error'])) {
         header('HTTP/1.0 400 Bad error');
-        echo json_encode(['message' => _perfex_upload_error($_FILES['file']['error'])]);
+        echo json_encode(['message' => _instafolio_upload_error($_FILES['file']['error'])]);
         die;
     }
 

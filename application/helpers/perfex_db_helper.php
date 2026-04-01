@@ -367,11 +367,11 @@ function get_primary_contact_user_id($userid)
 function get_option($name)
 {
     $CI =& get_instance();
-    if (!class_exists('perfex_base')) {
-        $CI->load->library('perfex_base');
+    if (!class_exists('instafolio_base')) {
+        $CI->load->library('instafolio_base');
     }
 
-    return $CI->perfex_base->get_option($name);
+    return $CI->instafolio_base->get_option($name);
 }
 /**
  * Get option value from database

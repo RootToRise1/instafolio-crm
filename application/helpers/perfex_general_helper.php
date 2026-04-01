@@ -618,10 +618,10 @@ function have_assigned_customers($staff_id = '')
 function has_contact_permission($permission, $contact_id = '')
 {
     $CI =& get_instance();
-    if (!class_exists('perfex_base')) {
-        $CI->load->library('perfex_base');
+    if (!class_exists('instafolio_base')) {
+        $CI->load->library('instafolio_base');
     }
-    $permissions = $CI->perfex_base->get_contact_permissions();
+    $permissions = $CI->instafolio_base->get_contact_permissions();
     // Contact id passed form function
     if ($contact_id != '') {
         $_contact_id = $contact_id;
