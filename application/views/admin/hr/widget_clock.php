@@ -79,22 +79,22 @@ try {
                 <div class="hr-att-footer">
                     <?php if ($checked_in) { ?>
                         <?php if ($on_break) { ?>
-                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/break_out'); ?>', 'break_out')" class="hr-att-btn hr-att-btn-break-end btn-block">
+                            <a href="<?php echo admin_url('hr/break_out'); ?>" class="hr-att-btn hr-att-btn-break-end btn-block">
                                 <i class="fa fa-play"></i>
                                 <span><?php echo _l('hr_end_break'); ?></span>
                             </a>
                         <?php } else { ?>
-                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/break_in'); ?>', 'break_in')" class="hr-att-btn hr-att-btn-break">
+                            <a href="<?php echo admin_url('hr/break_in'); ?>" class="hr-att-btn hr-att-btn-break">
                                 <i class="fa fa-pause"></i>
                                 <span><?php echo _l('hr_break'); ?></span>
                             </a>
-                            <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/clock_out'); ?>', 'clock_out')" class="hr-att-btn hr-att-btn-out">
+                            <a href="<?php echo admin_url('hr/clock_out'); ?>" class="hr-att-btn hr-att-btn-out">
                                 <i class="fa fa-sign-out"></i>
                                 <span><?php echo _l('hr_check_out'); ?></span>
                             </a>
                         <?php } ?>
                     <?php } else { ?>
-                        <a href="javascript:void(0)" onclick="hr_attendance_action('<?php echo admin_url('hr/clock_in'); ?>', 'clock_in')" class="hr-att-btn hr-att-btn-in btn-block">
+                        <a href="<?php echo admin_url('hr/clock_in'); ?>" class="hr-att-btn hr-att-btn-in btn-block">
                             <i class="fa fa-sign-in"></i>
                             <span><?php echo _l('hr_check_in'); ?></span>
                         </a>
@@ -106,52 +106,55 @@ try {
 </div>
 
 <script>
-function hr_attendance_action(url, action) {
-    var btn = $(event.target).closest('a');
-    if (!btn.length) {
-        btn = $(event.currentTarget).closest('a');
-    }
-    
-    console.log('HR Attendance Action:', action, url);
-    
-    if (!btn.length) {
-        alert('Error: Could not find button element');
-        return;
-    }
-    
-    var originalHtml = btn.html();
-    btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
-    btn.prop('disabled', true);
-    
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'json',
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
-        success: function(response) {
-            console.log('Success:', response);
-            if (response.success) {
-                alert_float('success', response.message || 'Action completed successfully');
-            } else {
-                alert_float('danger', response.message || 'An error occurred');
-            }
-            setTimeout(function() {
-                window.location.reload();
-            }, 1500);
-        },
-        error: function(xhr, status, error) {
-            console.log('Error:', status, error, 'Response:', xhr.responseText);
-            // Check if it's a redirect to login
-            if (xhr.responseText && xhr.responseText.indexOf('login') > -1) {
-                window.location.href = '<?php echo admin_url("authentication"); ?>';
-            } else {
-                // Direct redirect instead of reload
-                window.location.href = '<?php echo admin_url("hr/my_attendance"); ?>';
+$(document).ready(function() {
+    // Bind click events properly
+    $('.hr-att-btn-in, .hr-att-btn-out, .hr-att-btn-break, .hr-att-btn-break-end').on('click', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        
+        if (!url || url === 'javascript:void(0)' || url === '#') {
+            // Try to get URL from onclick
+            var onclick = $(this).attr('onclick');
+            if (onclick) {
+                var match = onclick.match(/hr_attendance_action\('([^']+)'/);
+                if (match && match[1]) {
+                    url = match[1];
+                }
             }
         }
+        
+        if (!url || url === 'javascript:void(0)' || url === '#') {
+            alert('Error: No valid URL found');
+            return;
+        }
+        
+        var btn = $(this);
+        var originalHtml = btn.html();
+        btn.html('<i class="fa fa-spinner fa-spin"></i> Processing...');
+        btn.prop('disabled', true);
+        
+        console.log('HR Attendance URL:', url);
+        
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log('Success:', response);
+                if (response.success) {
+                    alert_float('success', response.message || 'Action completed successfully');
+                } else {
+                    alert_float('danger', response.message || 'An error occurred');
+                }
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1500);
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', status, error);
+                window.location.href = '<?php echo admin_url("hr/my_attendance"); ?>';
+            }
+        });
     });
-}
+});
 </script>
