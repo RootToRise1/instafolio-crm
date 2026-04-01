@@ -38,6 +38,8 @@ Build an HR module for a Instafolio CRM system with:
 15. **HR tables exist**: `tblhr_departments`, `tblhr_designations`, `tblhr_roles`, `tblhr_shifts`, `tblhr_leave_requests`, `tblhr_attendance`, etc.
 16. **Column alias detection** - Using `preg_match('/\s+as\s+/i', $_field)` instead of `strpos()` to correctly detect SQL aliases
 17. **Database prefix** - Instafolio uses `tbl` as database prefix (not empty string)
+18. **Module routing** - Uses MX Router (HMVC), module routes loaded via `modules/hr/config/routes.php`
+19. **Branding renamed** - All "perfex" references changed to "instafolio" including theme folders, JS classes, PHP classes
 
 ## Accomplished
 
@@ -49,6 +51,20 @@ Build an HR module for a Instafolio CRM system with:
 - Attendance clock in/out with break support
 - Leave management (request, approve, reject)
 - Dashboard widgets positioned first on dashboard
+- **Attendance System** - Complete check-in, check-out, break-in, break-out functionality with beautiful UI
+
+### Attendance System ✅
+- Clock in/out functionality with database recording
+- Break in/out tracking with duration calculation
+- Late arrival detection based on shift timing
+- My Attendance page with beautiful UI design:
+  - Gradient header with live clock
+  - Status card showing current state (Not Checked In / Working / On Break)
+  - Big colored action buttons (Check In green, Check Out red, Break blue/orange)
+  - Current session info showing check-in time, work duration, break time, status
+  - Attendance history table with all records
+- Routes configured for admin/hr/clock_in, clock_out, break_in, break_out
+- Module controller handles all attendance actions
 
 ### Dashboard Widgets ✅
 - CSS moved to `modules/hr/assets/css/hr_widgets.css`
@@ -83,6 +99,16 @@ Build an HR module for a Instafolio CRM system with:
 - **Attendance Tab**: Shows all attendance records with date, check in/out, total hours, status, late minutes, overtime
 - **Leave Tab**: Shows all leave requests with type, dates, days, status, reason, applied date
 
+### Branding Changes ✅
+- Renamed "perfex" to "instafolio" throughout the project
+- Theme folder: `assets/themes/perfex/` → `assets/themes/instafolio/`
+- TinyMCE skin: `assets/plugins/tinymce/skins/perfex/` → `assets/plugins/tinymce/skins/instafolio/`
+- Class `Perfex_Base` → `Instafolio_Base`
+- Function `_perfex_upload_error()` → `_instafolio_upload_error()`
+- JS class `perfexCommands` → `instafolioCommands`
+- All URLs and comments updated
+- Git repository created: https://github.com/RootToRise1/instafolio-crm
+
 ## Relevant files / directories
 
 ### HR Module Core:
@@ -92,6 +118,11 @@ Build an HR module for a Instafolio CRM system with:
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/modules/hr/install.php` - Database tables installation
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/modules/hr/language/english/hr_lang.php` - Language strings
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/modules/hr/assets/css/hr_widgets.css` - Widget CSS
+
+### Attendance System:
+- `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/hr/my_attendance.php` - Beautiful attendance page with clock and history
+- `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/hr/attendance.php` - Attendance management page
+- `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/hr/attendance_report.php` - Attendance reports page
 
 ### Widget Views:
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/hr/widget_clock.php` - Attendance widget
@@ -113,6 +144,9 @@ Build an HR module for a Instafolio CRM system with:
 ### Table Configuration:
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/tables/hr_employees.php` - Table data
 
+### Routes:
+- `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/config/routes.php` - Main routes with HR routes added
+
 ### Reference Files (for structure):
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/clients/manage.php` - Customers list view
 - `/Applications/XAMPP/xamppfiles/htdocs/instafolio/application/views/admin/clients/client.php` - Customer profile view
@@ -122,14 +156,22 @@ Build an HR module for a Instafolio CRM system with:
 
 ## Next Steps
 
-1. **Test Employee List Page** - Verify table data loads correctly with the new configuration
-2. **Test Employee Profile Page** - Verify all tabs (Profile, Attendance, Leave) work correctly
-3. **Test CRUD Operations** - Add new employee, edit existing, delete employee
-4. **Test Toggle Active/Inactive** - Verify the status toggle works
-5. **Test Dashboard Widgets** - Verify clock in/out and leave requests widgets display correctly
+1. **Test Attendance System** - Verify clock in/out, break in/out work correctly
+2. **Test My Attendance Page** - Verify the beautiful UI displays correctly
+3. **Test Employee List Page** - Verify table data loads correctly with the new configuration
+4. **Test Employee Profile Page** - Verify all tabs (Profile, Attendance, Leave) work correctly
+5. **Test CRUD Operations** - Add new employee, edit existing, delete employee
+6. **Test Toggle Active/Inactive** - Verify the status toggle works
+7. **Test Dashboard Widgets** - Verify clock in/out and leave requests widgets display correctly
 
 ## Login Credentials
 
 **URL:** `http://localhost/instafolio/admin`
 **Email:** `admin@instafolio.demo`
 **Password:** `demo123`
+
+## Git Repository
+
+**Repository URL:** https://github.com/RootToRise1/instafolio-crm
+
+**Note:** Database SQL dumps are excluded from the repo (contain user data/passwords).
